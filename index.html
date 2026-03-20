@@ -172,7 +172,6 @@ button{font:inherit}
   border:1px solid var(--line);
   border-radius:999px;
   background:rgba(255,255,255,.72);
-  backdrop-filter:blur(14px);
   box-shadow:var(--shadow);
   justify-self:end;
 }
@@ -222,16 +221,15 @@ button{font:inherit}
   top:6.1rem;
   transition:
     opacity .28s linear,
-    transform .28s linear,
-    filter .28s linear;
-  will-change:transform, opacity, filter;
+    transform .28s linear;
+  will-change:transform, opacity;
 }
 
 /* ---------- HOME ---------- */
 
 .grid{
   display:grid;
-  grid-template-columns:230px minmax(0,1fr);
+  grid-template-columns:270px minmax(0,1fr);
   gap:1.15rem;
   align-items:start;
 }
@@ -245,7 +243,6 @@ button{font:inherit}
   border-radius:var(--radius);
   padding:1.2rem;
   box-shadow:var(--shadow);
-  backdrop-filter:blur(14px);
 }
 
 .portrait-panel{
@@ -361,58 +358,6 @@ h1{
   text-decoration:underline;
   text-decoration-color:rgba(47,128,237,.36);
   text-underline-offset:3px;
-}
-
-.hero-bottom{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:.2rem;
-}
-
-.visual-anchor{
-  width:min(100%, 320px);
-}
-
-.section-kicker{
-  font-size:.76rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:#6d88b8;
-  margin-bottom:.55rem;
-}
-
-.blank-visual{
-  height:155px;
-  border-radius:18px;
-  border:1px dashed rgba(47,128,237,.18);
-  background:
-    radial-gradient(circle at 18% 30%, rgba(47,128,237,.16), transparent 0 18%),
-    radial-gradient(circle at 75% 28%, rgba(143,188,255,.20), transparent 0 20%),
-    linear-gradient(135deg, rgba(255,255,255,.66), rgba(243,247,253,.85));
-  position:relative;
-  overflow:hidden;
-}
-
-.blank-visual::before{
-  content:"";
-  position:absolute;
-  inset:18px;
-  border-radius:14px;
-  border:1px solid rgba(47,128,237,.12);
-  background:
-    linear-gradient(115deg, transparent 0 36%, rgba(15,47,115,.08) 37%, transparent 38%),
-    linear-gradient(75deg, transparent 0 58%, rgba(15,47,115,.06) 59%, transparent 60%);
-}
-
-.blank-visual::after{
-  content:"Research · Children · Digital Mental Health";
-  position:absolute;
-  left:18px;
-  bottom:16px;
-  font-size:.74rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:#6d88b8;
 }
 
 /* ---------- CV / ACADEMIA ---------- */
@@ -544,15 +489,6 @@ footer{
   .stack-card{
     top:7rem;
   }
-
-  .hero-bottom{
-    justify-content:flex-start;
-  }
-
-  .visual-anchor{
-    width:100%;
-    max-width:none;
-  }
 }
 
 @media (max-width:720px){
@@ -597,7 +533,7 @@ footer{
   }
 
   .portrait{
-    min-height:260px;
+    min-height:300px;
   }
 
   h1{
@@ -610,10 +546,6 @@ footer{
     font-size:.98rem;
     line-height:1.72;
     max-width:none;
-  }
-
-  .blank-visual{
-    height:120px;
   }
 
   .page-head{
@@ -714,13 +646,6 @@ footer{
                     Division of Interdisciplinary Brain Sciences, Department of Psychiatry and Behavioral Sciences
                   </a>.
                 </p>
-              </div>
-
-              <div class="hero-bottom">
-                <div class="visual-anchor">
-                  <div class="section-kicker">Focus</div>
-                  <div class="blank-visual"></div>
-                </div>
               </div>
             </section>
           </div>
@@ -858,11 +783,6 @@ function clamp(value, min, max){
   return Math.min(Math.max(value, min), max);
 }
 
-function delayedBlur(progress, startAt = 0.72){
-  if(progress <= startAt) return 0;
-  return (progress - startAt) / (1 - startAt);
-}
-
 function updateScrollScene(){
   const rect = stage.getBoundingClientRect();
   const maxScroll = Math.max(stage.offsetHeight - window.innerHeight, 1);
@@ -873,22 +793,17 @@ function updateScrollScene(){
   const first = clamp(rawProgress / 0.62, 0, 1);
   const second = clamp((rawProgress - 0.62) / 0.38, 0, 1);
 
-  const homeBlur = delayedBlur(first, 0.76);
-  const cvBlurIn = delayedBlur(first, 0.70);
-  const cvBlurOut = delayedBlur(second, 0.78);
-  const academiaBlur = delayedBlur(second, 0.70);
-
   cards.home.style.opacity = `${1 - first * 0.88}`;
   cards.home.style.transform = `translateY(${-72 * first}px) scale(${1 - 0.018 * first})`;
-  cards.home.style.filter = `blur(${2.4 * homeBlur}px)`;
+  cards.home.style.filter = `none`;
 
   cards.cv.style.opacity = `${Math.min(0.12 + first, 1)}`;
   cards.cv.style.transform = `translateY(${70 - 70 * first - 50 * second}px) scale(${0.992 + 0.008 * first})`;
-  cards.cv.style.filter = `blur(${Math.max(1.4 - 1.4 * cvBlurIn + 1.8 * cvBlurOut, 0)}px)`;
+  cards.cv.style.filter = `none`;
 
   cards.academia.style.opacity = `${Math.min(0.08 + second, 1)}`;
   cards.academia.style.transform = `translateY(${85 - 85 * second}px) scale(${0.992 + 0.008 * second})`;
-  cards.academia.style.filter = `blur(${Math.max(1.6 - 1.6 * academiaBlur, 0)}px)`;
+  cards.academia.style.filter = `none`;
 
   if(rawProgress < 0.30) setActiveNav("home");
   else if(rawProgress < 0.76) setActiveNav("cv");
