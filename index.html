@@ -219,10 +219,8 @@ button{font:inherit}
   width:100%;
   left:0;
   top:6.1rem;
-  transition:
-    opacity .28s linear,
-    transform .28s linear;
-  will-change:transform, opacity;
+  transition:none;
+  will-change:auto;
 }
 
 /* ---------- HOME ---------- */
@@ -793,17 +791,23 @@ function updateScrollScene(){
   const first = clamp(rawProgress / 0.62, 0, 1);
   const second = clamp((rawProgress - 0.62) / 0.38, 0, 1);
 
-  cards.home.style.opacity = `${1 - first * 0.88}`;
-  cards.home.style.transform = `translateY(${-72 * first}px) scale(${1 - 0.018 * first})`;
-  cards.home.style.filter = `none`;
+  cards.home.style.opacity = rawProgress < 0.62 ? "1" : "0";
+  cards.home.style.transform = `translateY(${-72 * first}px)`;
+  cards.home.style.filter = "none";
+  cards.home.style.pointerEvents = rawProgress < 0.62 ? "auto" : "none";
+  cards.home.style.zIndex = rawProgress < 0.62 ? "3" : "1";
 
-  cards.cv.style.opacity = `${Math.min(0.12 + first, 1)}`;
-  cards.cv.style.transform = `translateY(${70 - 70 * first - 50 * second}px) scale(${0.992 + 0.008 * first})`;
-  cards.cv.style.filter = `none`;
+  cards.cv.style.opacity = rawProgress >= 0.62 && rawProgress < 0.92 ? "1" : "0";
+  cards.cv.style.transform = `translateY(${70 - 70 * first - 50 * second}px)`;
+  cards.cv.style.filter = "none";
+  cards.cv.style.pointerEvents = rawProgress >= 0.62 && rawProgress < 0.92 ? "auto" : "none";
+  cards.cv.style.zIndex = rawProgress >= 0.62 && rawProgress < 0.92 ? "3" : "1";
 
-  cards.academia.style.opacity = `${Math.min(0.08 + second, 1)}`;
-  cards.academia.style.transform = `translateY(${85 - 85 * second}px) scale(${0.992 + 0.008 * second})`;
-  cards.academia.style.filter = `none`;
+  cards.academia.style.opacity = rawProgress >= 0.92 ? "1" : "0";
+  cards.academia.style.transform = `translateY(${85 - 85 * second}px)`;
+  cards.academia.style.filter = "none";
+  cards.academia.style.pointerEvents = rawProgress >= 0.92 ? "auto" : "none";
+  cards.academia.style.zIndex = rawProgress >= 0.92 ? "3" : "1";
 
   if(rawProgress < 0.30) setActiveNav("home");
   else if(rawProgress < 0.76) setActiveNav("cv");
