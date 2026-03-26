@@ -233,6 +233,7 @@ button{font:inherit}
   backdrop-filter: blur(10px);
   box-shadow:var(--shadow);
   justify-self:end;
+  flex-wrap:wrap;
 }
 
 .tab-button{
@@ -285,7 +286,8 @@ button{font:inherit}
 .panel,
 .portrait-panel,
 .cv-card,
-.academia-card{
+.academia-card,
+.projects-card{
   background:var(--panel);
   border:1px solid var(--line);
   border-radius:var(--radius);
@@ -311,6 +313,16 @@ button{font:inherit}
   text-transform:uppercase;
   letter-spacing:.12em;
   font-size:.78rem;
+  position:relative;
+}
+
+.portrait::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(to top, rgba(0,0,0,.10), transparent 35%);
+  opacity:.35;
 }
 
 .portrait img{
@@ -397,7 +409,12 @@ h1{
   color:var(--muted);
   max-width:62ch;
   display:grid;
-  gap:.45rem;
+  gap:1rem;
+}
+
+.hero-copy p{
+  text-align:justify;
+  text-justify:inter-word;
 }
 
 .hero-copy a,
@@ -412,7 +429,8 @@ h1{
 /* ---------- CV / ACADEMIA ---------- */
 
 .cv-card,
-.academia-card{
+.academia-card,
+.projects-card{
   min-height:60vh;
 }
 
@@ -516,6 +534,247 @@ h1{
   line-height:1.72;
 }
 
+/* ---------- PROJECTS ---------- */
+
+.projects-tree{
+  position:relative;
+  padding:1.25rem 0 .5rem;
+}
+
+.tree-trunk{
+  width:6px;
+  height:68px;
+  margin:0 auto;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.22));
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+
+.tree-canopy{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(180px, 1fr));
+  gap:1rem;
+  margin-top:1rem;
+}
+
+.tree-canopy::before{
+  content:"";
+  position:absolute;
+  top:-34px;
+  left:50%;
+  transform:translateX(-50%);
+  width:72%;
+  height:34px;
+  border:2px solid rgba(0,0,0,.10);
+  border-bottom:none;
+  border-radius:999px 999px 0 0;
+}
+
+.project-node{
+  position:relative;
+  min-height:126px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:1rem;
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:var(--shadow);
+  color:var(--muted);
+  transition:.2s ease;
+  overflow:hidden;
+}
+
+.project-node::before{
+  content:"";
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  height:18px;
+  background:rgba(0,0,0,.12);
+}
+
+.project-node:hover{
+  transform:translateY(-4px);
+  color:var(--text);
+  border-color:rgba(0,0,0,.15);
+  background:#fff;
+}
+
+.project-node span{
+  max-width:14ch;
+  line-height:1.45;
+  font-weight:500;
+}
+
+.projects-note{
+  margin-top:1.1rem;
+  color:var(--muted);
+  line-height:1.7;
+  text-align:justify;
+}
+
+/* ---------- STICK FIGURE ---------- */
+
+.stick-figure-zone{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:8px;
+  height:96px;
+  pointer-events:none;
+  z-index:34;
+  overflow:hidden;
+}
+
+.stick-figure{
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:56px;
+  height:88px;
+  transform:translateX(-50%) translateY(120%);
+  opacity:0;
+  animation:stickFigureEntrance 11s ease-in-out infinite;
+}
+
+.stick-figure .head{
+  position:absolute;
+  top:0;
+  left:50%;
+  width:16px;
+  height:16px;
+  margin-left:-8px;
+  border:2px solid rgba(0,0,0,.78);
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+}
+
+.stick-figure .torso{
+  position:absolute;
+  top:16px;
+  left:50%;
+  width:2px;
+  height:26px;
+  margin-left:-1px;
+  background:rgba(0,0,0,.78);
+  transform-origin:bottom center;
+  animation:bodyBounce 11s ease-in-out infinite;
+}
+
+.stick-figure .arm{
+  position:absolute;
+  top:24px;
+  left:50%;
+  width:18px;
+  height:2px;
+  background:rgba(0,0,0,.76);
+  transform-origin:left center;
+}
+
+.stick-figure .arm.left{
+  margin-left:-1px;
+  transform:rotate(145deg);
+  animation:leftArmDance 11s ease-in-out infinite;
+}
+
+.stick-figure .arm.right{
+  margin-left:-17px;
+  transform-origin:right center;
+  transform:rotate(35deg);
+  animation:rightArmWave 11s ease-in-out infinite;
+}
+
+.stick-figure .leg{
+  position:absolute;
+  top:42px;
+  left:50%;
+  width:22px;
+  height:2px;
+  background:rgba(0,0,0,.76);
+}
+
+.stick-figure .leg.left{
+  margin-left:-1px;
+  transform-origin:left center;
+  transform:rotate(55deg);
+  animation:leftLegDance 11s ease-in-out infinite;
+}
+
+.stick-figure .leg.right{
+  margin-left:-21px;
+  transform-origin:right center;
+  transform:rotate(-55deg);
+  animation:rightLegDance 11s ease-in-out infinite;
+}
+
+@keyframes stickFigureEntrance{
+  0%, 58%{
+    opacity:0;
+    transform:translateX(-50%) translateY(120%);
+  }
+  62%{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+  70%{
+    opacity:1;
+    transform:translateX(-50%) translateY(-2px);
+  }
+  84%{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+  100%{
+    opacity:0;
+    transform:translateX(-50%) translateY(120%);
+  }
+}
+
+@keyframes bodyBounce{
+  0%,58%,100%{ transform:rotate(0deg) translateY(0); }
+  66%{ transform:rotate(-6deg) translateY(-2px); }
+  72%{ transform:rotate(6deg) translateY(0); }
+  78%{ transform:rotate(-5deg) translateY(-1px); }
+  84%{ transform:rotate(3deg) translateY(0); }
+}
+
+@keyframes rightArmWave{
+  0%,60%,100%{ transform:rotate(35deg); }
+  66%{ transform:rotate(-35deg); }
+  70%{ transform:rotate(40deg); }
+  74%{ transform:rotate(-32deg); }
+  78%{ transform:rotate(38deg); }
+  82%{ transform:rotate(-18deg); }
+}
+
+@keyframes leftArmDance{
+  0%,60%,100%{ transform:rotate(145deg); }
+  66%{ transform:rotate(120deg); }
+  72%{ transform:rotate(160deg); }
+  78%{ transform:rotate(130deg); }
+  84%{ transform:rotate(150deg); }
+}
+
+@keyframes leftLegDance{
+  0%,60%,100%{ transform:rotate(55deg); }
+  68%{ transform:rotate(25deg); }
+  74%{ transform:rotate(65deg); }
+  80%{ transform:rotate(32deg); }
+}
+
+@keyframes rightLegDance{
+  0%,60%,100%{ transform:rotate(-55deg); }
+  68%{ transform:rotate(-25deg); }
+  74%{ transform:rotate(-65deg); }
+  80%{ transform:rotate(-32deg); }
+}
+
 footer{
   padding:0 0 2rem;
   color:#666;
@@ -542,6 +801,14 @@ footer{
   .page-card{
     margin-top:6.7rem;
   }
+
+  .tree-canopy{
+    grid-template-columns:repeat(2, minmax(160px, 1fr));
+  }
+
+  .tree-canopy::before{
+    width:84%;
+  }
 }
 
 @media (max-width:720px){
@@ -561,7 +828,8 @@ footer{
   .panel,
   .portrait-panel,
   .cv-card,
-  .academia-card{
+  .academia-card,
+  .projects-card{
     padding:1rem;
   }
 
@@ -570,7 +838,22 @@ footer{
   }
 
   .portrait{
-    min-height:300px;
+    min-height:210px;
+    aspect-ratio:auto;
+    border-radius:18px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.50), rgba(255,255,255,.10)),
+      linear-gradient(135deg, rgba(47,128,237,.08), rgba(143,188,255,.14));
+  }
+
+  .portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 22%;
+    transform:scale(.94);
+    border-radius:16px;
+    box-shadow:0 18px 34px rgba(0,0,0,.10);
   }
 
   h1{
@@ -583,6 +866,7 @@ footer{
     font-size:.98rem;
     line-height:1.72;
     max-width:none;
+    gap:.9rem;
   }
 
   .page-head{
@@ -599,6 +883,41 @@ footer{
 
   .swim-banner{
     top:14px;
+  }
+
+  .tree-trunk{
+    height:48px;
+  }
+
+  .tree-canopy{
+    grid-template-columns:1fr;
+    gap:.85rem;
+  }
+
+  .tree-canopy::before{
+    width:2px;
+    height:22px;
+    top:-22px;
+    border:none;
+    background:rgba(0,0,0,.10);
+    border-radius:999px;
+  }
+
+  .project-node::before{
+    display:none;
+  }
+
+  .project-node{
+    min-height:102px;
+  }
+
+  .stick-figure-zone{
+    height:84px;
+  }
+
+  .stick-figure{
+    transform:translateX(-50%) translateY(120%) scale(.9);
+    transform-origin:bottom center;
   }
 }
 </style>
@@ -619,6 +938,17 @@ footer{
   </div>
 </div>
 
+<div class="stick-figure-zone" aria-hidden="true">
+  <div class="stick-figure">
+    <span class="head"></span>
+    <span class="torso"></span>
+    <span class="arm left"></span>
+    <span class="arm right"></span>
+    <span class="leg left"></span>
+    <span class="leg right"></span>
+  </div>
+</div>
+
 <div class="wrap">
   <header class="topbar">
     <div class="topbar-spacer" aria-hidden="true"></div>
@@ -627,6 +957,7 @@ footer{
       <button class="tab-button active" data-page="home">Home</button>
       <button class="tab-button" data-page="cv">CV</button>
       <button class="tab-button" data-page="academia">Academia</button>
+      <button class="tab-button" data-page="projects">Projects</button>
     </nav>
   </header>
 
@@ -664,29 +995,40 @@ footer{
           </aside>
 
           <section class="panel hero-panel">
-            <div class="eyebrow">Home</div>
             <h1>Good to have you here.</h1>
 
             <div class="hero-copy">
               <p>
                 Hi, my name is Marco.
-                I study digital mental health interventions to improve prevention and treatment outcomes, using randomized trials and usage data. 
-                My work focuses on how care structures can be expanded, improved, and individually tailored to reduce or prevent symptom burden and am,  
-                particularly interested in learning processes in human–technology interaction. I also explore how interventions can be adapted across cultures
-                and developmental stages, with a focus on child and adolescent populations and underrepresented groups.
+              </p>
 
+              <p>
+                I study digital mental health interventions to improve prevention and treatment outcomes, using randomized trials and usage data.
+                My work focuses on how care structures can be expanded, improved, and individually tailored to reduce or prevent symptom burden and am,
+                particularly interested in learning processes in human–technology interaction.
+              </p>
+
+              <p>
+                I also explore how interventions can be adapted across cultures and developmental stages, with a focus on child and adolescent populations
+                and underrepresented groups.
+              </p>
+
+              <p>
                 Thankfully, I get to explore all of this alongside curious and thoughtful people, as a PhD candidate in Behavioral and Social Sciences at the
-                Graduate School of Medicine and Health, Technical University of Munich, based at the Chair of Social Pediatrics. 
-                
+                Graduate School of Medicine and Health, Technical University of Munich, based at the Chair of Social Pediatrics.
+              </p>
+
+              <p>
                 I am currently a visiting researcher at the Division of Interdisciplinary Brain Sciences within the Department of Psychiatry and Behavioral Sciences at Stanford.
                 When I’m not working, you’ll likely find me running, swimming, or climbing outdoors.
-                
-                I’m always happy to connect with people interested in similar—or entirely different—topics. 
+              </p>
+
+              <p>
+                I’m always happy to connect with people interested in similar—or entirely different—topics.
                 Feel free to reach out: marco.gassner@tum.de OR mgassner@stanford.edu
+              </p>
 
-
-
-                
+              <p>
                 I'm happy to connect: mgassner@stanford.edu
               </p>
             </div>
@@ -783,6 +1125,35 @@ footer{
                 <p>Teaching for medical students during clinical rotation.</p>
               </div>
             </article>
+          </div>
+        </section>
+      </article>
+
+      <!-- PROJECTS -->
+      <article class="page-card" data-page-card="projects">
+        <section class="projects-card">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Projects</div>
+              <h2 class="section-title">Project Cluster</h2>
+            </div>
+          </div>
+
+          <div class="projects-tree">
+            <div class="tree-trunk" aria-hidden="true"></div>
+
+            <div class="tree-canopy">
+              <div class="project-node"><span>Project 01</span></div>
+              <div class="project-node"><span>Project 02</span></div>
+              <div class="project-node"><span>Project 03</span></div>
+              <div class="project-node"><span>Project 04</span></div>
+              <div class="project-node"><span>Project 05</span></div>
+              <div class="project-node"><span>Project 06</span></div>
+            </div>
+
+            <p class="projects-note">
+              This section is prepared as a tree-like cluster so that equally sized project tiles can be added here later on.
+            </p>
           </div>
         </section>
       </article>
