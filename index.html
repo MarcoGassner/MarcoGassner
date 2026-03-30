@@ -64,3 +64,1314 @@ button{font:inherit}
   width:100%;
   height:3px;
   z-index:40;
+  background:rgba(0,0,0,.06);
+}
+
+.scroll-progress span{
+  display:block;
+  height:100%;
+  width:100%;
+  transform-origin:left center;
+  transform:scaleX(0);
+  background:linear-gradient(90deg, rgba(47,128,237,.85), rgba(143,188,255,.8));
+}
+
+.wrap{
+  width:min(calc(100% - 2rem),var(--max));
+  margin:auto;
+  position:relative;
+  z-index:1;
+}
+
+/* ---------- TOP ---------- */
+
+.topbar{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:start;
+  gap:1rem;
+  padding:1rem 0 .25rem;
+  min-height:72px;
+  position:relative;
+}
+
+.topbar-spacer{
+  min-height:1px;
+}
+
+.nav{
+  display:flex;
+  gap:.4rem;
+  padding:.3rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter: blur(10px);
+  box-shadow:var(--shadow);
+  justify-self:end;
+  flex-wrap:wrap;
+  position:relative;
+  z-index:3;
+}
+
+.tab-button{
+  border:0;
+  background:none;
+  padding:.65rem 1rem;
+  border-radius:999px;
+  cursor:pointer;
+  color:var(--muted);
+  transition:.2s ease;
+}
+
+.tab-button:hover{
+  background:rgba(0,0,0,.04);
+  color:var(--text);
+}
+
+.tab-button.active{
+  background:rgba(0,0,0,.08);
+  color:var(--text);
+}
+
+/* ---------- SMALL SKETCH ANIMATION TOP RIGHT ---------- */
+
+.future-me-sketch{
+  position:absolute;
+  top:-6px;
+  right:210px;
+  width:170px;
+  height:170px;
+  pointer-events:none;
+  z-index:2;
+  transform:rotate(-3deg);
+}
+
+.future-me-note{
+  position:absolute;
+  top:0;
+  left:4px;
+  font-size:.92rem;
+  font-weight:700;
+  color:#1a1a1a;
+  letter-spacing:.01em;
+  transform:rotate(-6deg);
+}
+
+.future-me-arrow{
+  position:absolute;
+  top:16px;
+  left:2px;
+  width:82px;
+  height:42px;
+}
+
+.future-me-arrow path{
+  fill:none;
+  stroke:#141414;
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:6 7;
+  animation:arrowSketch 1.4s linear infinite;
+}
+
+.future-me-arrow polygon{
+  fill:#141414;
+  animation:arrowPulse 1.8s ease-in-out infinite;
+}
+
+.sketch-scene{
+  position:absolute;
+  right:0;
+  top:18px;
+  width:120px;
+  height:140px;
+}
+
+.sketch-ground{
+  position:absolute;
+  left:20px;
+  bottom:14px;
+  width:90px;
+  height:26px;
+  border:2px solid rgba(0,0,0,.75);
+  border-color:rgba(0,0,0,.75) transparent transparent transparent;
+  border-radius:50%;
+  transform:rotate(-2deg);
+  opacity:.55;
+}
+
+.sketch-ground::before,
+.sketch-ground::after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  border-top:2px solid rgba(0,0,0,.45);
+  border-left:2px solid transparent;
+  border-right:2px solid transparent;
+  border-bottom:2px solid transparent;
+}
+
+.sketch-ground::before{
+  width:54px;
+  height:14px;
+  left:2px;
+  top:-1px;
+  transform:rotate(-3deg);
+}
+
+.sketch-ground::after{
+  width:40px;
+  height:12px;
+  right:2px;
+  top:4px;
+  transform:rotate(7deg);
+}
+
+.sketch-tree{
+  position:absolute;
+  right:8px;
+  bottom:26px;
+  width:66px;
+  height:102px;
+}
+
+.sketch-trunk{
+  position:absolute;
+  left:28px;
+  bottom:0;
+  width:7px;
+  height:44px;
+  background:rgba(0,0,0,.78);
+  border-radius:999px;
+  transform:skew(-4deg);
+}
+
+.sketch-branch{
+  position:absolute;
+  height:3px;
+  background:rgba(0,0,0,.72);
+  border-radius:999px;
+  transform-origin:left center;
+}
+
+.sketch-branch.b1{
+  width:28px;
+  left:31px;
+  bottom:36px;
+  transform:rotate(-22deg);
+}
+.sketch-branch.b2{
+  width:24px;
+  left:12px;
+  bottom:35px;
+  transform:rotate(-156deg);
+}
+.sketch-branch.b3{
+  width:18px;
+  left:31px;
+  bottom:29px;
+  transform:rotate(12deg);
+}
+
+.sketch-canopy{
+  position:absolute;
+  border:2px solid rgba(0,0,0,.8);
+  border-radius:50%;
+  background:rgba(110,150,88,.08);
+}
+
+.sketch-canopy.c1{
+  width:24px;
+  height:22px;
+  left:8px;
+  bottom:48px;
+}
+.sketch-canopy.c2{
+  width:28px;
+  height:26px;
+  left:23px;
+  bottom:58px;
+}
+.sketch-canopy.c3{
+  width:26px;
+  height:24px;
+  left:40px;
+  bottom:48px;
+}
+.sketch-canopy.c4{
+  width:22px;
+  height:20px;
+  left:22px;
+  bottom:42px;
+}
+
+.sketch-olive{
+  position:absolute;
+  width:5px;
+  height:7px;
+  border:1.7px solid rgba(0,0,0,.8);
+  border-radius:50%;
+  background:rgba(0,0,0,.02);
+}
+
+.sketch-olive.o1{ left:20px; bottom:58px; }
+.sketch-olive.o2{ left:34px; bottom:69px; }
+.sketch-olive.o3{ left:50px; bottom:58px; }
+.sketch-olive.o4{ left:38px; bottom:48px; }
+
+.sketch-man{
+  position:absolute;
+  left:18px;
+  bottom:20px;
+  width:44px;
+  height:90px;
+  transform-origin:55% 90%;
+  animation:sketchBody 2.6s ease-in-out infinite;
+}
+
+.sketch-head{
+  position:absolute;
+  top:0;
+  left:12px;
+  width:16px;
+  height:18px;
+  border:2px solid rgba(0,0,0,.82);
+  border-radius:45% 45% 48% 48%;
+  background:rgba(255,255,255,.15);
+}
+
+.sketch-hair{
+  position:absolute;
+  top:-4px;
+  left:8px;
+  width:24px;
+  height:16px;
+  border:2px solid rgba(0,0,0,.82);
+  border-radius:50%;
+  border-bottom:none;
+  background:transparent;
+}
+
+.sketch-hair::before,
+.sketch-hair::after{
+  content:"";
+  position:absolute;
+  width:8px;
+  height:8px;
+  border:2px solid rgba(0,0,0,.82);
+  border-radius:50%;
+  border-bottom-color:transparent;
+  border-right-color:transparent;
+  background:transparent;
+}
+
+.sketch-hair::before{
+  left:-2px;
+  top:5px;
+  transform:rotate(-18deg);
+}
+
+.sketch-hair::after{
+  right:-2px;
+  top:5px;
+  transform:rotate(28deg);
+}
+
+.sketch-beard{
+  position:absolute;
+  top:11px;
+  left:10px;
+  width:18px;
+  height:12px;
+  border:2px solid rgba(0,0,0,.82);
+  border-top:none;
+  border-radius:0 0 45% 45%;
+}
+
+.sketch-body{
+  position:absolute;
+  top:20px;
+  left:10px;
+  width:20px;
+  height:25px;
+  border:2px solid rgba(0,0,0,.82);
+  border-radius:8px 8px 6px 6px;
+  background:rgba(255,255,255,.10);
+}
+
+.sketch-arm-left,
+.sketch-arm-right{
+  position:absolute;
+  top:24px;
+  width:3px;
+  background:rgba(0,0,0,.82);
+  border-radius:999px;
+  transform-origin:top center;
+}
+
+.sketch-arm-left{
+  left:9px;
+  height:24px;
+  transform:rotate(18deg);
+}
+
+.sketch-arm-right{
+  left:30px;
+  height:30px;
+  transform:rotate(-34deg);
+  animation:sketchArm 2.6s ease-in-out infinite;
+}
+
+.sketch-hand-right{
+  position:absolute;
+  top:50px;
+  left:27px;
+  width:7px;
+  height:7px;
+  border:2px solid rgba(0,0,0,.82);
+  border-radius:50%;
+  background:#fff;
+  animation:sketchHand 2.6s ease-in-out infinite;
+}
+
+.sketch-picked-olive{
+  position:absolute;
+  top:50px;
+  left:28px;
+  width:5px;
+  height:7px;
+  border:1.7px solid rgba(0,0,0,.82);
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+  opacity:0;
+  animation:sketchPickedOlive 2.6s ease-in-out infinite;
+}
+
+.sketch-leg-left,
+.sketch-leg-right{
+  position:absolute;
+  top:44px;
+  width:3px;
+  height:28px;
+  background:rgba(0,0,0,.82);
+  border-radius:999px;
+}
+
+.sketch-leg-left{
+  left:15px;
+  transform:rotate(7deg);
+}
+
+.sketch-leg-right{
+  left:24px;
+  transform:rotate(-5deg);
+}
+
+.sketch-foot-left,
+.sketch-foot-right{
+  position:absolute;
+  top:70px;
+  width:10px;
+  height:3px;
+  background:rgba(0,0,0,.82);
+  border-radius:999px;
+}
+
+.sketch-foot-left{ left:10px; }
+.sketch-foot-right{ left:21px; }
+
+.sketch-olive-target{
+  position:absolute;
+  right:47px;
+  top:28px;
+  width:5px;
+  height:7px;
+  border:1.7px solid rgba(0,0,0,.82);
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  animation:sketchOliveDetach 2.6s ease-in-out infinite;
+}
+
+@keyframes sketchBody{
+  0%,100%{ transform:translateY(0) rotate(0deg); }
+  50%{ transform:translateY(-2px) rotate(-2deg); }
+}
+
+@keyframes sketchArm{
+  0%,100%{ transform:rotate(-34deg); }
+  30%{ transform:rotate(-58deg); }
+  55%{ transform:rotate(-22deg); }
+}
+
+@keyframes sketchHand{
+  0%,100%{ transform:translate(0,0); }
+  30%{ transform:translate(-1px,-12px); }
+  55%{ transform:translate(2px,1px); }
+}
+
+@keyframes sketchPickedOlive{
+  0%,24%,100%{ opacity:0; transform:translate(0,0) scale(.8); }
+  34%{ opacity:1; transform:translate(0,-8px) scale(1); }
+  56%{ opacity:1; transform:translate(4px,0) scale(1); }
+  70%{ opacity:0; transform:translate(6px,6px) scale(.8); }
+}
+
+@keyframes sketchOliveDetach{
+  0%,24%,100%{ opacity:1; transform:translate(0,0) scale(1); }
+  30%,70%{ opacity:0; transform:translate(-18px,22px) scale(.7); }
+}
+
+@keyframes arrowSketch{
+  0%{ stroke-dashoffset:0; }
+  100%{ stroke-dashoffset:18; }
+}
+
+@keyframes arrowPulse{
+  0%,100%{ transform:translateX(0); }
+  50%{ transform:translateX(3px); }
+}
+
+/* ---------- PAGES ---------- */
+
+.page-stage{
+  position:relative;
+  padding:.15rem 0 1rem;
+  min-height:calc(100vh - 90px);
+}
+
+.page-card{
+  display:none;
+  width:100%;
+  margin-top:5.9rem;
+}
+
+.page-card.active{
+  display:block;
+}
+
+/* ---------- HOME ---------- */
+
+.grid{
+  display:grid;
+  grid-template-columns:270px minmax(0,1fr);
+  gap:1.15rem;
+  align-items:start;
+}
+
+.panel,
+.portrait-panel,
+.cv-card,
+.academia-card,
+.projects-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.2rem;
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(8px);
+}
+
+.portrait-panel{
+  padding:.8rem;
+}
+
+.portrait{
+  aspect-ratio:4/5;
+  border-radius:20px;
+  overflow:hidden;
+  background:linear-gradient(135deg, rgba(47,128,237,.05), rgba(143,188,255,.10));
+  border:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#666;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.78rem;
+  position:relative;
+}
+
+.portrait::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(to top, rgba(0,0,0,.10), transparent 35%);
+  opacity:.35;
+}
+
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.profile-links{
+  display:grid;
+  gap:.7rem;
+  margin-top:.8rem;
+}
+
+.profile-links a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  color:var(--muted);
+  padding:.8rem .95rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.82);
+  border:1px solid rgba(0,0,0,.08);
+  transition:.2s ease;
+}
+
+.profile-links a:hover{
+  transform:translateY(-2px);
+  color:var(--text);
+  border-color:rgba(0,0,0,.16);
+  background:#fff;
+}
+
+.profile-links .left{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+}
+
+.profile-links svg{
+  width:15px;
+  height:15px;
+}
+
+.hero-panel{
+  display:grid;
+  gap:.95rem;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:.55rem;
+  padding:.45rem .8rem;
+  border-radius:999px;
+  background:rgba(0,0,0,.05);
+  color:var(--text);
+  font-size:.82rem;
+  width:max-content;
+  border:1px solid rgba(0,0,0,.08);
+}
+
+.eyebrow::before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+h1{
+  font-size:clamp(1.10rem, 1.45vw, 1.35rem);
+  line-height:1.08;
+  letter-spacing:-.03em;
+  font-weight:600;
+  max-width:none;
+}
+
+.hero-copy{
+  font-size:1rem;
+  line-height:1.8;
+  color:var(--muted);
+  max-width:62ch;
+  display:grid;
+  gap:1rem;
+}
+
+.hero-copy p{
+  text-align:justify;
+  text-justify:inter-word;
+}
+
+.hero-copy a,
+.academic-item a,
+.section-copy a{
+  color:var(--text);
+  text-decoration:underline;
+  text-decoration-color:rgba(0,0,0,.24);
+  text-underline-offset:3px;
+}
+
+/* ---------- CV / ACADEMIA ---------- */
+
+.cv-card,
+.academia-card,
+.projects-card{
+  min-height:60vh;
+}
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:1rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+}
+
+.section-title{
+  font-size:1.18rem;
+  letter-spacing:-.03em;
+}
+
+.section-copy{
+  color:var(--muted);
+  line-height:1.7;
+  max-width:70ch;
+}
+
+.cv-actions{
+  display:flex;
+  gap:.7rem;
+  flex-wrap:wrap;
+}
+
+.pdf-trigger{
+  display:inline-flex;
+  align-items:center;
+  gap:.7rem;
+  padding:.8rem 1.05rem;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.12);
+  background:linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.08));
+  color:var(--text);
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.pdf-trigger:hover{
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+
+.cv-viewer{
+  width:100%;
+  height:48vh;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:#fff;
+  transition:height .25s ease;
+}
+
+.cv-viewer.large{
+  height:84vh;
+}
+
+.cv-viewer.collapsed{
+  display:none;
+}
+
+.cv-viewer iframe{
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+.academia-list{
+  display:grid;
+  gap:1rem;
+  margin-top:.8rem;
+}
+
+.academic-item{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:1rem;
+  align-items:start;
+  padding-top:1rem;
+  border-top:1px solid var(--line);
+}
+
+.academic-meta{
+  color:#666;
+  font-size:.88rem;
+  padding-top:.1rem;
+}
+
+.academic-item h3{
+  font-size:1.04rem;
+  letter-spacing:-.02em;
+  margin-bottom:.28rem;
+}
+
+.academic-item p{
+  color:var(--muted);
+  line-height:1.72;
+}
+
+/* ---------- PROJECTS ---------- */
+
+.projects-tree{
+  position:relative;
+  padding:1.25rem 0 .5rem;
+}
+
+.tree-trunk{
+  width:6px;
+  height:68px;
+  margin:0 auto;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.22));
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+
+.tree-canopy{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(180px, 1fr));
+  gap:1rem;
+  margin-top:1rem;
+}
+
+.tree-canopy::before{
+  content:"";
+  position:absolute;
+  top:-34px;
+  left:50%;
+  transform:translateX(-50%);
+  width:72%;
+  height:34px;
+  border:2px solid rgba(0,0,0,.10);
+  border-bottom:none;
+  border-radius:999px 999px 0 0;
+}
+
+.project-node{
+  position:relative;
+  min-height:126px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:1rem;
+  border-radius:20px;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:var(--shadow);
+  color:var(--muted);
+  transition:.2s ease;
+  overflow:hidden;
+}
+
+.project-node::before{
+  content:"";
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:2px;
+  height:18px;
+  background:rgba(0,0,0,.12);
+}
+
+.project-node:hover{
+  transform:translateY(-4px);
+  color:var(--text);
+  border-color:rgba(0,0,0,.15);
+  background:#fff;
+}
+
+.project-node span{
+  max-width:14ch;
+  line-height:1.45;
+  font-weight:500;
+}
+
+.projects-note{
+  margin-top:1.1rem;
+  color:var(--muted);
+  line-height:1.7;
+  text-align:justify;
+}
+
+footer{
+  padding:0 0 2rem;
+  color:#666;
+  font-size:.9rem;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width:1120px){
+  .future-me-sketch{
+    right:180px;
+    transform:scale(.94) rotate(-3deg);
+    transform-origin:top right;
+  }
+}
+
+@media (max-width:940px){
+  .topbar{
+    grid-template-columns:1fr;
+    gap:.8rem;
+  }
+
+  .nav{
+    justify-self:start;
+  }
+
+  .future-me-sketch{
+    position:relative;
+    right:auto;
+    top:auto;
+    width:150px;
+    height:150px;
+    justify-self:end;
+    margin-top:-.2rem;
+    margin-bottom:.3rem;
+  }
+
+  .grid,
+  .academic-item{
+    grid-template-columns:1fr;
+  }
+
+  .page-card{
+    margin-top:6.7rem;
+  }
+
+  .tree-canopy{
+    grid-template-columns:repeat(2, minmax(160px, 1fr));
+  }
+
+  .tree-canopy::before{
+    width:84%;
+  }
+}
+
+@media (max-width:720px){
+  .wrap{
+    width:min(calc(100% - 1rem),var(--max));
+  }
+
+  .topbar{
+    padding:.8rem 0 .2rem;
+  }
+
+  .nav{
+    width:max-content;
+    max-width:100%;
+  }
+
+  .future-me-sketch{
+    width:128px;
+    height:128px;
+    margin-top:-.25rem;
+  }
+
+  .future-me-note{
+    font-size:.82rem;
+  }
+
+  .sketch-scene{
+    transform:scale(.9);
+    transform-origin:top right;
+  }
+
+  .panel,
+  .portrait-panel,
+  .cv-card,
+  .academia-card,
+  .projects-card{
+    padding:1rem;
+  }
+
+  .portrait-panel{
+    padding:.75rem;
+  }
+
+  .portrait{
+    min-height:210px;
+    aspect-ratio:auto;
+    border-radius:18px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.50), rgba(255,255,255,.10)),
+      linear-gradient(135deg, rgba(47,128,237,.08), rgba(143,188,255,.14));
+  }
+
+  .portrait img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 22%;
+    transform:scale(.94);
+    border-radius:16px;
+    box-shadow:0 18px 34px rgba(0,0,0,.10);
+  }
+
+  h1{
+    font-size:1.02rem;
+    line-height:1.12;
+    max-width:14ch;
+  }
+
+  .hero-copy{
+    font-size:.98rem;
+    line-height:1.72;
+    max-width:none;
+    gap:.9rem;
+  }
+
+  .page-head{
+    align-items:flex-start;
+  }
+
+  .cv-viewer{
+    height:46vh;
+  }
+
+  .cv-viewer.large{
+    height:78vh;
+  }
+
+  .tree-trunk{
+    height:48px;
+  }
+
+  .tree-canopy{
+    grid-template-columns:1fr;
+    gap:.85rem;
+  }
+
+  .tree-canopy::before{
+    width:2px;
+    height:22px;
+    top:-22px;
+    border:none;
+    background:rgba(0,0,0,.10);
+    border-radius:999px;
+  }
+
+  .project-node::before{
+    display:none;
+  }
+
+  .project-node{
+    min-height:102px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="scroll-progress" aria-hidden="true">
+  <span id="progressDot"></span>
+</div>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="topbar-spacer" aria-hidden="true"></div>
+
+    <div class="future-me-sketch" aria-hidden="true">
+      <div class="future-me-note">future me</div>
+
+      <svg class="future-me-arrow" viewBox="0 0 82 42">
+        <path d="M5 12 C18 3, 34 5, 47 14 S66 24, 70 25" />
+        <polygon points="64,19 79,27 62,32"></polygon>
+      </svg>
+
+      <div class="sketch-scene">
+        <div class="sketch-ground"></div>
+
+        <div class="sketch-man">
+          <div class="sketch-hair"></div>
+          <div class="sketch-head"></div>
+          <div class="sketch-beard"></div>
+          <div class="sketch-body"></div>
+          <div class="sketch-arm-left"></div>
+          <div class="sketch-arm-right"></div>
+          <div class="sketch-hand-right"></div>
+          <div class="sketch-picked-olive"></div>
+          <div class="sketch-leg-left"></div>
+          <div class="sketch-leg-right"></div>
+          <div class="sketch-foot-left"></div>
+          <div class="sketch-foot-right"></div>
+        </div>
+
+        <div class="sketch-tree">
+          <div class="sketch-trunk"></div>
+          <div class="sketch-branch b1"></div>
+          <div class="sketch-branch b2"></div>
+          <div class="sketch-branch b3"></div>
+
+          <div class="sketch-canopy c1"></div>
+          <div class="sketch-canopy c2"></div>
+          <div class="sketch-canopy c3"></div>
+          <div class="sketch-canopy c4"></div>
+
+          <div class="sketch-olive o1"></div>
+          <div class="sketch-olive o2"></div>
+          <div class="sketch-olive o3"></div>
+          <div class="sketch-olive o4"></div>
+          <div class="sketch-olive-target"></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Primary">
+      <button class="tab-button active" data-page="home">Home</button>
+      <button class="tab-button" data-page="cv">CV</button>
+      <button class="tab-button" data-page="academia">Academia</button>
+      <button class="tab-button" data-page="projects">Projects</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-stage">
+      <!-- HOME -->
+      <article class="page-card active" data-page-card="home">
+        <div class="grid">
+          <aside class="portrait-panel">
+            <div class="portrait">
+              <img src="https://baseresourcesstack-documentsbucket9ec9deb9-qmmkdw8bfxhu.s3.eu-central-1.amazonaws.com/public/videos/Bilder/Marco_Fav.jpeg" alt="Portrait of Marco Gassner">
+            </div>
+
+            <div class="profile-links">
+              <a href="https://www.linkedin.com/in/marco-gassner-9491a41a7/" target="_blank" rel="noopener noreferrer">
+                <span class="left">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.48 1s2.5 1.12 2.5 2.5ZM.5 8h4V24h-4V8Zm7 0h3.83v2.18h.05C11.91 9.22 13.65 7.5 16.55 7.5 22.04 7.5 23 11.11 23 15.8V24h-4v-7.28c0-1.74-.03-3.97-2.42-3.97-2.42 0-2.79 1.89-2.79 3.84V24h-4V8Z"/>
+                  </svg>
+                  <span>LinkedIn</span>
+                </span>
+                <span>↗</span>
+              </a>
+
+              <a href="https://profiles.stanford.edu/marco-gassner" target="_blank" rel="noopener noreferrer">
+                <span class="left">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2L2 7v2c0 5.5 3.8 10.7 10 13 6.2-2.3 10-7.5 10-13V7L12 2z"/>
+                  </svg>
+                  <span>Stanford</span>
+                </span>
+                <span>↗</span>
+              </a>
+            </div>
+          </aside>
+
+          <section class="panel hero-panel">
+            <h1>Good to have you here.</h1>
+
+            <div class="hero-copy">
+              <p>
+                Hi, my name is Marco.
+              </p>
+
+              <p>
+                I study digital mental health interventions to understand, how we can improve prevention and treatment outcomes, using randomized trials and usage data.
+                Currently I am working on the implentation of a blended psychoeducational approach for families with a history of forced displacement. I investigate how culturally 
+                sensitive and developmentally tailored systems can provide early-stage support to prevent symptom escalation and ensure equitable access for underserved groups.
+                Thankfully, I get to explore all of this alongside curious and inspiring people, at the Technical University of Munich, at the Chair of Social Pediatrics.
+              </p>
+
+              <p>
+                Currently I am a Visiting Researcher at the Division of Interdisciplinary Brain Sciences within the Department of Psychiatry and Behavioral Sciences at Stanford.
+              </p>
+              <p>
+                When I’m not working, you’ll likely find me running, swimming, or climbing outdoors. 🪨🌊🏞️
+              </p>
+              <p>
+                I’m always happy to connect!
+                Feel free to reach out! You can reach me through: marco.gassner@tum.de or mgassner@stanford.edu
+              </p>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <!-- CV -->
+      <article class="page-card" data-page-card="cv">
+        <section class="cv-card">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">CV</div>
+              <h2 class="section-title">Curriculum Vitae</h2>
+            </div>
+
+            <div class="cv-actions">
+              <button class="pdf-trigger" id="toggleCvOpen">Open CV</button>
+              <button class="pdf-trigger" id="toggleCvSize" style="display:none;">Larger</button>
+              <a class="pdf-trigger" href="https://baseresourcesstack-documentsbucket9ec9deb9-qmmkdw8bfxhu.s3.eu-central-1.amazonaws.com/public/videos/Bilder/CV_MG_26.pdf" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a>
+            </div>
+          </div>
+
+          <div class="cv-viewer collapsed" id="cvViewer">
+            <iframe src="https://baseresourcesstack-documentsbucket9ec9deb9-qmmkdw8bfxhu.s3.eu-central-1.amazonaws.com/public/videos/Bilder/CV_MG_26.pdf" title="Marco Gassner CV"></iframe>
+          </div>
+        </section>
+      </article>
+
+      <!-- ACADEMIA -->
+      <article class="page-card" data-page-card="academia">
+        <section class="academia-card">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Academia</div>
+              <h2 class="section-title">Selected Work</h2>
+            </div>
+          </div>
+
+          <div class="academia-list">
+            <article class="academic-item">
+              <div class="academic-meta">Publication · 2025</div>
+              <div>
+                <h3>Dysregulated Screen Exposure Is Associated With Severity of Language and Communication Impairments in Children With Developmental Disorders</h3>
+                <p>
+                  Hahnefeld A., Fink M., Hauber E., Le Beherec S., Gassner M., Klosinski M., Mall V. <em>Acta Paediatr.</em> 2025 Jul 18.
+                  <a href="https://doi.org/10.1111/apa.70223" target="_blank" rel="noopener noreferrer">DOI: 10.1111/apa.70223</a>
+                </p>
+              </div>
+            </article>
+
+            <article class="academic-item">
+              <div class="academic-meta">Under Review</div>
+              <div>
+                <h3>Refugee children’s mental health and development over time: A two-year follow-up study</h3>
+                <p>Le Beherec S., Bernhardt K., Gassner M., Hauber E., Klosinski M., Mall V., &amp; Hahnefeld A.</p>
+              </div>
+            </article>
+
+            <article class="academic-item">
+              <div class="academic-meta">Under Review</div>
+              <div>
+                <h3>Low-threshold trauma-therapy for children in Ukraine</h3>
+                <p>Hahnefeld A., Richter K., Gassner M., Negele F., Mall V.</p>
+              </div>
+            </article>
+
+            <article class="academic-item">
+              <div class="academic-meta">Conference · 2025</div>
+              <div>
+                <h3>The Baby Comfort Guide</h3>
+                <p>
+                  Mobile-Based Intervention for Parents of Children with Crying/Sleeping/Feeding Problems:
+                  Current Status of the Project and Real-World Evaluation. Accepted for oral presentation at ESRII 2025, Vilnius.
+                </p>
+              </div>
+            </article>
+
+            <article class="academic-item">
+              <div class="academic-meta">Conference · 2025</div>
+              <div>
+                <h3>Towards Enhancing a Psychoeducational Manual through a Blended Approach</h3>
+                <p>
+                  Ongoing Development of a Low-Threshold, Multilingual and Mobile Intervention.
+                  Accepted poster presentation at ESRII 2025, Vilnius.
+                </p>
+              </div>
+            </article>
+
+            <article class="academic-item">
+              <div class="academic-meta">Teaching · 2026–Present</div>
+              <div>
+                <h3>Introduction to Social Pediatrics</h3>
+                <p>Teaching for medical students during clinical rotation.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </article>
+
+      <!-- PROJECTS -->
+      <article class="page-card" data-page-card="projects">
+        <section class="projects-card">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow">Projects - UNDER CONSTRUCTION :) </div>
+              <h2 class="section-title">Project Cluster</h2>
+            </div>
+          </div>
+
+          <div class="projects-tree">
+            <div class="tree-trunk" aria-hidden="true"></div>
+
+            <div class="tree-canopy">
+              <div class="project-node"><span>Project 01</span></div>
+              <div class="project-node"><span>Project 02</span></div>
+              <div class="project-node"><span>Project 03</span></div>
+              <div class="project-node"><span>Project 04</span></div>
+              <div class="project-node"><span>Project 05</span></div>
+              <div class="project-node"><span>Project 06</span></div>
+            </div>
+
+            <p class="projects-note">
+             Under Construction :) 
+            </p>
+          </div>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer>© 2026 Marco Gassner</footer>
+</div>
+
+<script>
+const progressDot = document.getElementById("progressDot");
+const buttons = document.querySelectorAll(".tab-button");
+const cards = document.querySelectorAll(".page-card");
+
+const cvViewer = document.getElementById("cvViewer");
+const toggleCvOpen = document.getElementById("toggleCvOpen");
+const toggleCvSize = document.getElementById("toggleCvSize");
+
+function setActivePage(name){
+  cards.forEach(card=>{
+    card.classList.toggle("active", card.dataset.pageCard === name);
+  });
+
+  buttons.forEach(button=>{
+    button.classList.toggle("active", button.dataset.page === name);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  updateProgress();
+}
+
+function updateProgress(){
+  const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+  progressDot.style.transform = `scaleX(${progress})`;
+}
+
+buttons.forEach(button=>{
+  button.addEventListener("click", ()=>{
+    setActivePage(button.dataset.page);
+  });
+});
+
+toggleCvOpen.addEventListener("click", ()=>{
+  const isCollapsed = cvViewer.classList.contains("collapsed");
+  cvViewer.classList.toggle("collapsed");
+  toggleCvSize.style.display = isCollapsed ? "inline-flex" : "none";
+  toggleCvOpen.textContent = isCollapsed ? "Close CV" : "Open CV";
+
+  if(!isCollapsed){
+    cvViewer.classList.remove("large");
+    toggleCvSize.textContent = "Larger";
+  }
+});
+
+toggleCvSize.addEventListener("click", ()=>{
+  cvViewer.classList.toggle("large");
+  toggleCvSize.textContent = cvViewer.classList.contains("large") ? "Smaller" : "Larger";
+});
+
+window.addEventListener("scroll", updateProgress, { passive:true });
+window.addEventListener("resize", updateProgress);
+updateProgress();
+</script>
+</body>
+</html>
