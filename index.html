@@ -5,6 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Marco Gassner</title>
 
+  <!-- Olivenbaum-Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href='data:image/svg+xml;utf8,
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <rect width="64" height="64" rx="14" fill="%23f6f7f9"/>
+      <path d="M31 47 C31 40, 32 33, 34 27" stroke="%23715c42" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M34 28 C28 26, 22 22, 18 17" stroke="%23715c42" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M35 26 C41 24, 46 20, 50 16" stroke="%23715c42" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <ellipse cx="18" cy="17" rx="8" ry="4" transform="rotate(-28 18 17)" fill="%2391a66f"/>
+      <ellipse cx="24" cy="21" rx="9" ry="4.5" transform="rotate(-12 24 21)" fill="%23879f63"/>
+      <ellipse cx="44" cy="18" rx="9" ry="4.5" transform="rotate(22 44 18)" fill="%2391a66f"/>
+      <ellipse cx="38" cy="23" rx="10" ry="4.8" transform="rotate(6 38 23)" fill="%237d9658"/>
+      <ellipse cx="30" cy="14" rx="9" ry="4.5" transform="rotate(-6 30 14)" fill="%23a0b67b"/>
+      <ellipse cx="31" cy="30" rx="7" ry="3.3" transform="rotate(-24 31 30)" fill="%2391a66f"/>
+      <circle cx="42" cy="23" r="1.8" fill="%23596b3e"/>
+      <circle cx="26" cy="24" r="1.8" fill="%23596b3e"/>
+    </svg>'
+  />
+
   <style>
     :root{
       --text:#171717;
@@ -196,9 +217,10 @@
 
     .grid{
       display:grid;
-      grid-template-columns:270px minmax(0,1fr);
+      grid-template-columns:270px minmax(0, 760px);
       gap:1.15rem;
       align-items:start;
+      justify-content:start;
     }
 
     .panel,
@@ -289,6 +311,8 @@
     .hero-panel{
       display:grid;
       gap:.95rem;
+      padding-left:1rem;
+      padding-right:1rem;
     }
 
     .eyebrow{
@@ -324,7 +348,7 @@
       font-size:1rem;
       line-height:1.8;
       color:var(--muted);
-      max-width:62ch;
+      max-width:58ch;
       display:grid;
       gap:1rem;
     }
@@ -399,21 +423,26 @@
 
     .cv-viewer{
       width:100%;
-      height:48vh;
+      height:72vh;
       border:1px solid var(--line);
       border-radius:20px;
       overflow:hidden;
       background:#fff;
-      transition:height .25s ease;
+      transition:transform .35s ease, box-shadow .35s ease, height .35s ease;
+      transform-origin:center center;
+      box-shadow:0 8px 26px rgba(0,0,0,.05);
     }
 
-    .cv-viewer.large{height:84vh}
-    .cv-viewer.collapsed{display:none}
+    .cv-viewer:hover{
+      transform:scale(1.03);
+      box-shadow:0 24px 60px rgba(0,0,0,.12);
+    }
 
     .cv-viewer iframe{
       width:100%;
       height:100%;
       border:0;
+      display:block;
     }
 
     .academia-list{
@@ -448,87 +477,87 @@
       line-height:1.72;
     }
 
-    .projects-tree{
-      position:relative;
-      padding:1.25rem 0 .5rem;
-    }
-
-    .tree-trunk{
-      width:6px;
-      height:68px;
-      margin:0 auto;
-      border-radius:999px;
-      background:linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.22));
-      box-shadow:0 10px 24px rgba(0,0,0,.06);
-    }
-
-    .tree-canopy{
-      position:relative;
+    /* Project Cards */
+    .projects-grid{
       display:grid;
-      grid-template-columns:repeat(3, minmax(180px, 1fr));
+      grid-template-columns:repeat(3, minmax(0, 1fr));
       gap:1rem;
       margin-top:1rem;
     }
 
-    .tree-canopy::before{
-      content:"";
-      position:absolute;
-      top:-34px;
-      left:50%;
-      transform:translateX(-50%);
-      width:72%;
-      height:34px;
-      border:2px solid rgba(0,0,0,.10);
-      border-bottom:none;
-      border-radius:999px 999px 0 0;
-    }
-
-    .project-node{
+    .project-card{
       position:relative;
-      min-height:126px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:1rem;
-      border-radius:20px;
-      background:rgba(255,255,255,.92);
-      border:1px solid rgba(0,0,0,.08);
-      box-shadow:var(--shadow);
-      color:var(--muted);
-      transition:.2s ease;
+      min-height:390px;
+      border-radius:22px;
       overflow:hidden;
-    }
-
-    .project-node::before{
-      content:"";
-      position:absolute;
-      top:-18px;
-      left:50%;
-      transform:translateX(-50%);
-      width:2px;
-      height:18px;
-      background:rgba(0,0,0,.12);
-    }
-
-    .project-node:hover{
-      transform:translateY(-4px);
-      color:var(--text);
-      border-color:rgba(0,0,0,.15);
+      border:1px solid rgba(0,0,0,.08);
       background:#fff;
+      box-shadow:var(--shadow);
+      isolation:isolate;
     }
 
-    .project-node span{
-      max-width:14ch;
-      line-height:1.45;
-      font-weight:500;
+    .project-image{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      transition:transform .55s ease, filter .45s ease;
     }
 
-    .projects-note{
-      margin-top:1.1rem;
-      color:var(--muted);
-      line-height:1.7;
+    .project-card:hover .project-image{
+      transform:scale(1.06);
+      filter:brightness(.55);
+    }
+
+    .project-title{
+      position:absolute;
+      left:1rem;
+      right:1rem;
+      bottom:1rem;
+      z-index:2;
+      color:#fff;
+      font-size:1.05rem;
+      font-weight:600;
+      letter-spacing:-.02em;
+      transition:opacity .3s ease, transform .3s ease;
+      text-shadow:0 3px 16px rgba(0,0,0,.35);
+    }
+
+    .project-card:hover .project-title{
+      opacity:0;
+      transform:translateY(12px);
+    }
+
+    .project-overlay{
+      position:absolute;
+      inset:0;
+      z-index:3;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:1.2rem;
+      background:linear-gradient(180deg, rgba(13,13,13,.08) 0%, rgba(13,13,13,.22) 35%, rgba(13,13,13,.84) 100%);
+      opacity:0;
+      transition:opacity .35s ease;
+    }
+
+    .project-card:hover .project-overlay{
+      opacity:1;
+    }
+
+    .project-overlay h3{
+      color:#fff;
+      font-size:1.05rem;
+      margin-bottom:.65rem;
+      letter-spacing:-.02em;
+    }
+
+    .project-overlay p{
+      color:rgba(255,255,255,.92);
+      line-height:1.65;
+      font-size:.94rem;
       text-align:justify;
+      text-justify:inter-word;
     }
 
     footer{
@@ -559,21 +588,34 @@
       100%{transform:scale(1.04); opacity:1}
     }
 
+    @media (max-width:1080px){
+      .projects-grid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width:940px){
       .topbar{
         grid-template-columns:1fr;
         gap:.8rem;
       }
+
       .nav{justify-self:start}
+
       .grid,
       .academic-item{
         grid-template-columns:1fr;
       }
+
       .page-card{margin-top:6.7rem}
-      .tree-canopy{
-        grid-template-columns:repeat(2, minmax(160px, 1fr));
+
+      .cv-viewer{
+        height:64vh;
       }
-      .tree-canopy::before{width:84%}
+
+      .projects-grid{
+        grid-template-columns:1fr;
+      }
     }
 
     @media (max-width:720px){
@@ -616,6 +658,11 @@
         box-shadow:0 18px 34px rgba(0,0,0,.10);
       }
 
+      .hero-panel{
+        padding-left:.2rem;
+        padding-right:.2rem;
+      }
+
       h1{
         font-size:1.02rem;
         line-height:1.12;
@@ -630,26 +677,18 @@
       }
 
       .page-head{align-items:flex-start}
-      .cv-viewer{height:46vh}
-      .cv-viewer.large{height:78vh}
-      .tree-trunk{height:48px}
 
-      .tree-canopy{
-        grid-template-columns:1fr;
-        gap:.85rem;
+      .cv-viewer{
+        height:56vh;
       }
 
-      .tree-canopy::before{
-        width:2px;
-        height:22px;
-        top:-22px;
-        border:none;
-        background:rgba(0,0,0,.10);
-        border-radius:999px;
+      .cv-viewer:hover{
+        transform:none;
       }
 
-      .project-node::before{display:none}
-      .project-node{min-height:102px}
+      .project-card{
+        min-height:360px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -657,6 +696,12 @@
       .site-shell{
         opacity:1 !important;
         transform:none !important;
+      }
+      .project-image,
+      .project-overlay,
+      .project-title,
+      .cv-viewer{
+        transition:none !important;
       }
     }
   </style>
@@ -718,8 +763,7 @@
                     <span>↗</span>
                   </a>
 
-                  <!-- HIER DEINE MAIL EINTRAGEN -->
-                  <a href="mailto:deine.mail@beispiel.de" class="mail-link">
+                  <a href="mailto:mgassner@stanford.edu" class="mail-link">
                     <span class="left">
                       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm17 2.24-7.39 5.54a1 1 0 0 1-1.22 0L4 7.24V18h16V7.24Zm-1.67-.24H5.67L12 11.75 18.33 7Z"/>
@@ -732,7 +776,7 @@
               </aside>
 
               <section class="panel hero-panel">
-                <h1>Good to have you here.</h1>
+                <h1>Good to have you here!</h1>
 
                 <div class="hero-copy">
                   <p>Hi, my name is Marco.</p>
@@ -752,7 +796,7 @@
                   </p>
 
                   <p>
-                    I’m always happy to connect. Feel free to reach out.
+                    I’m always happy to connect!
                   </p>
                 </div>
               </section>
@@ -769,13 +813,11 @@
                 </div>
 
                 <div class="cv-actions">
-                  <button class="pdf-trigger" id="toggleCvOpen">Open CV</button>
-                  <button class="pdf-trigger" id="toggleCvSize" style="display:none;">Larger</button>
                   <a class="pdf-trigger" href="https://baseresourcesstack-documentsbucket9ec9deb9-qmmkdw8bfxhu.s3.eu-central-1.amazonaws.com/public/videos/Bilder/CV_MG_26.pdf" target="_blank" rel="noopener noreferrer">Open in new tab ↗</a>
                 </div>
               </div>
 
-              <div class="cv-viewer collapsed" id="cvViewer">
+              <div class="cv-viewer" id="cvViewer">
                 <iframe src="https://baseresourcesstack-documentsbucket9ec9deb9-qmmkdw8bfxhu.s3.eu-central-1.amazonaws.com/public/videos/Bilder/CV_MG_26.pdf" title="Marco Gassner CV"></iframe>
               </div>
             </section>
@@ -857,31 +899,53 @@
             <section class="projects-card">
               <div class="page-head">
                 <div>
-                  <div class="eyebrow">Projects - UNDER CONSTRUCTION :)</div>
-                  <h2 class="section-title">Project Cluster</h2>
+                  <div class="eyebrow">Projects</div>
+                  <h2 class="section-title">Selected Projects</h2>
                 </div>
               </div>
 
-              <div class="projects-tree">
-                <div class="tree-trunk" aria-hidden="true"></div>
+              <div class="projects-grid">
+                <article class="project-card">
+                  <div
+                    class="project-image"
+                    style="background-image:url('https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=1200&q=80');"
+                  ></div>
+                  <div class="project-title">InterAPPtion</div>
+                  <div class="project-overlay">
+                    <h3>InterAPPtion</h3>
+                    <p>
+                      The aim of the planned study is to investigate the effectiveness of the mobile application InterAPPtion, both as a standalone intervention and in combination with the parent training program Parents’ College. The study examines whether InterAPPtion increases adherence, promotes parents’ knowledge acquisition, and supports child development through targeted everyday guidance. In addition, it assesses whether the combined approach reduces the overall impairment of the children.
+                    </p>
+                  </div>
+                </article>
 
-                <div class="tree-canopy">
-                  <div class="project-node"><span>InterAPPtion</span></div>
-                  <div class="project-node"><span>Project 02</span></div>
-                  <div class="project-node"><span>Project 03</span></div>
-                  <div class="project-node"><span>Project 04</span></div>
-                  <div class="project-node"><span>Project 05</span></div>
-                  <div class="project-node"><span>Project 06</span></div>
-                </div>
+                <article class="project-card">
+                  <div
+                    class="project-image"
+                    style="background-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80');"
+                  ></div>
+                  <div class="project-title">Baby Comfort Guide</div>
+                  <div class="project-overlay">
+                    <h3>Baby Comfort Guide</h3>
+                    <p>
+                      This project focuses on a mobile-based intervention for parents of children with crying, sleeping, and feeding problems. The work explores how digital support can be integrated into everyday family life in a practical and low-threshold way. The broader goal is to improve accessibility, strengthen confidence in caregiving, and evaluate real-world use of the intervention under naturalistic conditions.
+                    </p>
+                  </div>
+                </article>
 
-                <p class="projects-note">
-                  The aim of the planned study is to investigate the effectiveness of the mobile application InterAPPtion, both as a standalone intervention and in combination with the parent training program Parents’ College.
-                  The study will examine whether InterAPPtion increases adherence, promotes parents’ knowledge acquisition, and supports child development through targeted everyday guidance.
-                  In addition, it will assess whether the combined approach reduces the overall impairment of the children.
-                  The app content is modularized based on the manual and prepared in a multimedia format.
-                  It is provided in eight languages and includes psychoeducational videos, exercises, and a community function.
-                  The app is currently in the development and testing phase.
-                </p>
+                <article class="project-card">
+                  <div
+                    class="project-image"
+                    style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80');"
+                  ></div>
+                  <div class="project-title">Blended Psychoeducation</div>
+                  <div class="project-overlay">
+                    <h3>Blended Psychoeducation</h3>
+                    <p>
+                      This ongoing development project aims to enhance a psychoeducational manual through a blended, multilingual, and mobile intervention. The focus lies on low-threshold support structures for families with a history of forced displacement. It combines culturally sensitive design, digital accessibility, and developmentally tailored content in order to provide early-stage support and reduce barriers to care for underserved groups.
+                    </p>
+                  </div>
+                </article>
               </div>
             </section>
           </article>
@@ -896,10 +960,6 @@
     const progressDot = document.getElementById("progressDot");
     const buttons = document.querySelectorAll(".tab-button");
     const cards = document.querySelectorAll(".page-card");
-
-    const cvViewer = document.getElementById("cvViewer");
-    const toggleCvOpen = document.getElementById("toggleCvOpen");
-    const toggleCvSize = document.getElementById("toggleCvSize");
 
     const introOverlay = document.getElementById("introOverlay");
     const introSvg = document.getElementById("introSvg");
@@ -929,23 +989,6 @@
       button.addEventListener("click", ()=>{
         setActivePage(button.dataset.page);
       });
-    });
-
-    toggleCvOpen.addEventListener("click", ()=>{
-      const isCollapsed = cvViewer.classList.contains("collapsed");
-      cvViewer.classList.toggle("collapsed");
-      toggleCvSize.style.display = isCollapsed ? "inline-flex" : "none";
-      toggleCvOpen.textContent = isCollapsed ? "Close CV" : "Open CV";
-
-      if(!isCollapsed){
-        cvViewer.classList.remove("large");
-        toggleCvSize.textContent = "Larger";
-      }
-    });
-
-    toggleCvSize.addEventListener("click", ()=>{
-      cvViewer.classList.toggle("large");
-      toggleCvSize.textContent = cvViewer.classList.contains("large") ? "Smaller" : "Larger";
     });
 
     window.addEventListener("scroll", updateProgress, { passive:true });
