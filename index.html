@@ -58,57 +58,10 @@
     a{color:inherit;text-decoration:none}
     button{font:inherit}
 
-    .intro-overlay{
-      position:fixed;
-      inset:0;
-      z-index:200;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:.8rem;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,.97), rgba(247,248,251,.985) 42%, rgba(243,246,252,1) 100%);
-      transition:opacity .45s ease, visibility .45s ease;
-    }
-
-    .intro-overlay.hidden{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-
-    .intro-stage{
-      width:170px;
-      height:170px;
-      display:grid;
-      place-items:center;
-      position:relative;
-    }
-
-    .intro-svg{
-      width:120px;
-      height:120px;
-      overflow:visible;
-    }
-
-    .intro-label{
-      font-size:.88rem;
-      color:#7a7a7a;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      min-height:1em;
-    }
-
     .site-shell{
-      opacity:0;
-      transform:translateY(10px);
-      transition:opacity .55s ease, transform .55s ease;
-    }
-
-    .site-shell.visible{
       opacity:1;
-      transform:translateY(0);
+      transform:none;
+      animation:shellIn .48s ease both;
     }
 
     .scroll-progress{
@@ -193,11 +146,83 @@
       display:none;
       width:100%;
       margin-top:5.9rem;
+      position:relative;
     }
 
     .page-card.active{
       display:block;
     }
+
+    .home-corner-animation{
+      position:absolute;
+      top:-4.95rem;
+      right:.25rem;
+      width:122px;
+      height:122px;
+      border-radius:32px;
+      background:
+        radial-gradient(circle at 30% 18%, rgba(255,255,255,.95), rgba(255,255,255,.52) 48%, rgba(255,255,255,.32) 100%);
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 20px 55px rgba(0,0,0,.08);
+      backdrop-filter:blur(16px);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .home-corner-animation::before{
+      content:"";
+      position:absolute;
+      width:95px;
+      height:95px;
+      border-radius:50%;
+      background:conic-gradient(
+        from 180deg,
+        rgba(47,128,237,.00),
+        rgba(47,128,237,.18),
+        rgba(145,166,111,.24),
+        rgba(255,217,224,.22),
+        rgba(47,128,237,.00)
+      );
+      animation:softSpin 7s linear infinite;
+      filter:blur(.2px);
+      z-index:-1;
+    }
+
+    .home-corner-animation::after{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.68);
+      pointer-events:none;
+    }
+
+    .mini-orbit{
+      width:86px;
+      height:86px;
+      overflow:visible;
+    }
+
+    .orbit-ring{
+      transform-origin:50px 50px;
+      animation:softSpin 9s linear infinite;
+    }
+
+    .orbit-dot{
+      transform-origin:50px 50px;
+      animation:orbitPulse 2.3s ease-in-out infinite;
+    }
+
+    .mini-tree{
+      transform-origin:50px 82px;
+      animation:miniTreeSway 2.6s ease-in-out infinite;
+    }
+
+    .mini-leaf-a{animation:leafFloatA 2.8s ease-in-out infinite}
+    .mini-leaf-b{animation:leafFloatB 3.1s ease-in-out infinite}
+    .mini-leaf-c{animation:leafFloatC 2.7s ease-in-out infinite}
 
     .grid{
       display:grid;
@@ -238,7 +263,6 @@
       position:relative;
     }
 
-    /* removed dark/tinted overlay over image */
     .portrait::after{
       content:none;
     }
@@ -547,29 +571,45 @@
       font-size:.9rem;
     }
 
-    @keyframes spinnerRotate{
+    @keyframes shellIn{
+      from{
+        opacity:0;
+        transform:translateY(8px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @keyframes softSpin{
       from{transform:rotate(0deg)}
       to{transform:rotate(360deg)}
     }
 
-    @keyframes swimMove{
-      0%,100%{transform:translateX(0)}
-      50%{transform:translateX(8px)}
+    @keyframes orbitPulse{
+      0%,100%{opacity:.52; transform:scale(1)}
+      50%{opacity:1; transform:scale(1.16)}
     }
 
-    @keyframes flowerFloat{
+    @keyframes miniTreeSway{
+      0%,100%{transform:rotate(-1.2deg) translateY(0)}
+      50%{transform:rotate(2deg) translateY(-1px)}
+    }
+
+    @keyframes leafFloatA{
       0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-4px)}
+      50%{transform:translateY(-3px)}
     }
 
-    @keyframes treeSway{
-      0%,100%{transform:rotate(0deg)}
-      50%{transform:rotate(2deg)}
+    @keyframes leafFloatB{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(2px)}
     }
 
-    @keyframes speakerPulse{
-      0%,100%{opacity:.45}
-      50%{opacity:1}
+    @keyframes leafFloatC{
+      0%,100%{transform:translateX(0)}
+      50%{transform:translateX(2px)}
     }
 
     @media (max-width:1080px){
@@ -591,7 +631,22 @@
         grid-template-columns:1fr;
       }
 
-      .page-card{margin-top:6.7rem}
+      .page-card{
+        margin-top:6.7rem;
+      }
+
+      .home-corner-animation{
+        top:-5.65rem;
+        right:.15rem;
+        width:104px;
+        height:104px;
+        border-radius:28px;
+      }
+
+      .mini-orbit{
+        width:76px;
+        height:76px;
+      }
 
       .cv-viewer{
         height:64vh;
@@ -614,6 +669,22 @@
       .nav{
         width:max-content;
         max-width:100%;
+      }
+
+      .page-card{
+        margin-top:5.8rem;
+      }
+
+      .home-corner-animation{
+        top:-4.9rem;
+        width:82px;
+        height:82px;
+        border-radius:22px;
+      }
+
+      .mini-orbit{
+        width:62px;
+        height:62px;
       }
 
       .panel,
@@ -676,11 +747,19 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .intro-overlay{display:none}
-      .site-shell{
-        opacity:1 !important;
-        transform:none !important;
+      html{scroll-behavior:auto}
+
+      .site-shell,
+      .home-corner-animation::before,
+      .orbit-ring,
+      .orbit-dot,
+      .mini-tree,
+      .mini-leaf-a,
+      .mini-leaf-b,
+      .mini-leaf-c{
+        animation:none !important;
       }
+
       .project-image,
       .project-overlay,
       .project-title,
@@ -692,13 +771,6 @@
 </head>
 
 <body>
-  <div class="intro-overlay" id="introOverlay" aria-hidden="true">
-    <div class="intro-stage">
-      <svg class="intro-svg" id="introSvg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
-    </div>
-    <div class="intro-label" id="introLabel">Loading</div>
-  </div>
-
   <div class="site-shell" id="siteShell">
     <div class="scroll-progress" aria-hidden="true">
       <span id="progressDot"></span>
@@ -719,6 +791,29 @@
       <main>
         <section class="page-stage">
           <article class="page-card active" data-page-card="home">
+            <div class="home-corner-animation" aria-hidden="true">
+              <svg class="mini-orbit" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="orbit-ring">
+                  <circle cx="50" cy="50" r="38" stroke="rgba(47,128,237,.22)" stroke-width="1.6" stroke-dasharray="3 9"/>
+                  <circle class="orbit-dot" cx="50" cy="12" r="3.2" fill="#2f80ed"/>
+                  <circle class="orbit-dot" cx="86" cy="50" r="2.4" fill="#91a66f"/>
+                  <circle class="orbit-dot" cx="23" cy="78" r="2.1" fill="#f1c6d5"/>
+                </g>
+
+                <g class="mini-tree">
+                  <path d="M50 78 C50 68 51.5 57 55 45" stroke="#715c42" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+                  <path d="M54 50 C46 47 39 41 34 33" stroke="#715c42" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+                  <path d="M55 46 C64 43 71 38 77 30" stroke="#715c42" stroke-width="2.9" fill="none" stroke-linecap="round"/>
+
+                  <ellipse class="mini-leaf-a" cx="34" cy="33" rx="10" ry="5" transform="rotate(-28 34 33)" fill="#91a66f"/>
+                  <ellipse class="mini-leaf-b" cx="44" cy="39" rx="11" ry="5.2" transform="rotate(-10 44 39)" fill="#879f63"/>
+                  <ellipse class="mini-leaf-c" cx="74" cy="31" rx="11" ry="5.1" transform="rotate(24 74 31)" fill="#91a66f"/>
+                  <ellipse class="mini-leaf-a" cx="62" cy="40" rx="12" ry="5.3" transform="rotate(8 62 40)" fill="#7d9658"/>
+                  <ellipse class="mini-leaf-b" cx="52" cy="26" rx="11" ry="5" transform="rotate(-6 52 26)" fill="#a0b67b"/>
+                </g>
+              </svg>
+            </div>
+
             <div class="grid">
               <aside class="portrait-panel">
                 <div class="portrait">
@@ -762,21 +857,21 @@
                 <h1>Good to have you here!</h1>
 
                 <div class="hero-copy">
-<p>
-  I’m interested in how digital mental health interventions support changes in clinical symptoms and development, and how they can be adapted across users and contexts.
-I link behavioral data with clinical and developmental outcomes to study which interventions work for whom.</p>
+                  <p>
+                    I’m interested in how digital mental health interventions support changes in clinical symptoms and development, and how they can be adapted across users and contexts.
+                    I link behavioral data with clinical and developmental outcomes to study which interventions work for whom.
+                  </p>
 
-<p>
-  I am a Visiting Researcher at the Division of Interdisciplinary Brain Sciences in the Department of Psychiatry and Behavioral Sciences at Stanford.
-</p>
+                  <p>
+                    I am a Visiting Researcher at the Division of Interdisciplinary Brain Sciences in the Department of Psychiatry and Behavioral Sciences at Stanford.
+                  </p>
 
-<p>
-  Outside of work, I enjoy running, swimming, and climbing outdoors. 🪨🌊🏞️
-</p>
+                  <p>
+                    Outside of work, I enjoy running, swimming, and climbing outdoors. 🪨🌊🏞️
+                  </p>
 
-<p>
-  I’m always happy to connect! Feel free to reach out :) 
-</p>
+                  <p>
+                    I’m always happy to connect! Feel free to reach out :)
                   </p>
                 </div>
               </section>
@@ -910,11 +1005,6 @@ I link behavioral data with clinical and developmental outcomes to study which i
     const buttons = document.querySelectorAll(".tab-button");
     const cards = document.querySelectorAll(".page-card");
 
-    const introOverlay = document.getElementById("introOverlay");
-    const introSvg = document.getElementById("introSvg");
-    const introLabel = document.getElementById("introLabel");
-    const siteShell = document.getElementById("siteShell");
-
     function setActivePage(name){
       cards.forEach(card=>{
         card.classList.toggle("active", card.dataset.pageCard === name);
@@ -942,93 +1032,7 @@ I link behavioral data with clinical and developmental outcomes to study which i
 
     window.addEventListener("scroll", updateProgress, { passive:true });
     window.addEventListener("resize", updateProgress);
-
-    function drawVintageLoader(){
-      introLabel.textContent = "Loading";
-      introSvg.innerHTML = `
-        <g style="animation: spinnerRotate .65s linear infinite; transform-origin:60px 60px;">
-          <circle cx="60" cy="60" r="28" stroke="#b9b9b9" stroke-width="7" opacity="0.25"/>
-          <path d="M60 32 A28 28 0 0 1 88 60" stroke="#8b8b8b" stroke-width="7" stroke-linecap="round"/>
-          <circle cx="60" cy="60" r="42" stroke="#d8d8d8" stroke-width="1.5" stroke-dasharray="2 6" opacity="0.8"/>
-        </g>
-      `;
-    }
-
-    function drawSpeaker(){
-      introLabel.textContent = "";
-      introSvg.innerHTML = `
-        <g>
-          <path d="M34 70 L50 70 L66 84 L66 36 L50 50 L34 50 Z" stroke="#6f6f6f" stroke-width="3.5" fill="none" stroke-linejoin="round"/>
-          <path d="M78 47 Q88 60 78 73" stroke="#8aa0c8" stroke-width="3.5" fill="none" stroke-linecap="round" style="animation:speakerPulse .7s ease-in-out infinite;"/>
-          <path d="M87 39 Q102 60 87 81" stroke="#b3c6de" stroke-width="3" fill="none" stroke-linecap="round" style="animation:speakerPulse .7s ease-in-out infinite .08s;"/>
-        </g>
-      `;
-    }
-
-    function drawSwimmer(){
-      introLabel.textContent = "";
-      introSvg.innerHTML = `
-        <g style="animation:swimMove .8s ease-in-out infinite;">
-          <path d="M24 78 Q34 72 44 78 T64 78 T84 78 T96 78" stroke="#90a4c2" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <path d="M30 87 Q40 81 50 87 T70 87 T90 87" stroke="#b3c6de" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <circle cx="64" cy="45" r="7" stroke="#6f6f6f" stroke-width="3" fill="none"/>
-          <path d="M54 58 Q63 50 74 57" stroke="#6f6f6f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-          <path d="M73 56 L88 49" stroke="#6f6f6f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-        </g>
-      `;
-    }
-
-    function drawFlower(){
-      introLabel.textContent = "";
-      introSvg.innerHTML = `
-        <g style="animation:flowerFloat .65s ease-in-out infinite; transform-origin:60px 60px;">
-          <line x1="60" y1="64" x2="60" y2="98" stroke="#7da884" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M60 82 C48 78 46 68 56 66" stroke="#7da884" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <path d="M60 88 C71 84 75 74 66 72" stroke="#7da884" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <ellipse cx="60" cy="44" rx="10" ry="16" fill="#f1d7e6"/>
-          <ellipse cx="76" cy="54" rx="10" ry="16" transform="rotate(60 76 54)" fill="#e7dcff"/>
-          <ellipse cx="44" cy="54" rx="10" ry="16" transform="rotate(-60 44 54)" fill="#d8ebff"/>
-          <ellipse cx="76" cy="34" rx="10" ry="16" transform="rotate(120 76 34)" fill="#ffe0d7"/>
-          <ellipse cx="44" cy="34" rx="10" ry="16" transform="rotate(-120 44 34)" fill="#e4f5df"/>
-          <circle cx="60" cy="44" r="8" fill="#f0c45c"/>
-        </g>
-      `;
-    }
-
-    function drawTree(){
-      introLabel.textContent = "";
-      introSvg.innerHTML = `
-        <g style="animation:treeSway .85s ease-in-out infinite; transform-origin:60px 88px;">
-          <path d="M60 92 L60 58" stroke="#715c42" stroke-width="5" stroke-linecap="round"/>
-          <path d="M60 68 C52 66 46 60 42 54" stroke="#715c42" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-          <path d="M60 64 C68 62 74 57 78 51" stroke="#715c42" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="42" cy="52" rx="11" ry="5.2" transform="rotate(-24 42 52)" fill="#91a66f"/>
-          <ellipse cx="53" cy="46" rx="12" ry="5.6" transform="rotate(-8 53 46)" fill="#879f63"/>
-          <ellipse cx="72" cy="49" rx="12" ry="5.4" transform="rotate(18 72 49)" fill="#91a66f"/>
-          <ellipse cx="65" cy="39" rx="13" ry="5.8" transform="rotate(6 65 39)" fill="#7d9658"/>
-          <ellipse cx="50" cy="34" rx="12" ry="5.4" transform="rotate(-8 50 34)" fill="#a0b67b"/>
-        </g>
-      `;
-    }
-
-    function runIntroSequence(){
-      drawVintageLoader();
-
-      setTimeout(drawSpeaker, 420);
-      setTimeout(drawSwimmer, 850);
-      setTimeout(drawFlower, 1250);
-      setTimeout(drawTree, 1650);
-
-      setTimeout(()=>{
-        introOverlay.classList.add("hidden");
-        siteShell.classList.add("visible");
-      }, 2100);
-    }
-
-    window.addEventListener("load", ()=>{
-      runIntroSequence();
-      updateProgress();
-    });
+    window.addEventListener("load", updateProgress);
   </script>
 </body>
 </html>
